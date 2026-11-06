@@ -1,0 +1,106 @@
+{
+  "note": "Mock fixture. Original customer attributes come from the homework brief; identifiers and fields listed in synthetic_fields are synthetic. Null means unknown, not healthy, empty, or absent entitlement. Billing ages are relative to the ticket snapshot, not the current clock.",
+  "customers": [
+    {
+      "id": "cust-001",
+      "plan": "Free",
+      "upgrade_attempted": true,
+      "tenure_months": 4,
+      "seats": null,
+      "region": null,
+      "entitlement": {
+        "pro": false
+      },
+      "usage": null,
+      "past_tickets": [],
+      "sla": null,
+      "billing_events": [
+        {
+          "age_minutes": 180,
+          "amount": 29.99,
+          "currency": "USD",
+          "status": "pending_authorization",
+          "card_reference": "card ending 4242"
+        },
+        {
+          "age_minutes": 120,
+          "amount": 29.99,
+          "currency": "USD",
+          "status": "pending_authorization",
+          "card_reference": "card ending 1881"
+        },
+        {
+          "age_minutes": 60,
+          "amount": 29.99,
+          "currency": "USD",
+          "status": "pending_authorization",
+          "card_reference": "card ending 1881"
+        }
+      ],
+      "synthetic_fields": [
+        "id",
+        "entitlement",
+        "billing_events"
+      ],
+      "unknown_fields": [
+        "seats",
+        "region",
+        "usage",
+        "sla"
+      ]
+    },
+    {
+      "id": "cust-002",
+      "plan": "Enterprise",
+      "upgrade_attempted": null,
+      "tenure_months": 8,
+      "seats": 45,
+      "region": "ap-southeast",
+      "region_label": "Thailand",
+      "entitlement": null,
+      "usage": null,
+      "past_tickets": null,
+      "first_critical_issue": true,
+      "sla": null,
+      "billing_events": null,
+      "synthetic_fields": [
+        "id",
+        "region"
+      ],
+      "unknown_fields": [
+        "upgrade_attempted",
+        "entitlement",
+        "usage",
+        "past_tickets",
+        "sla",
+        "billing_events"
+      ],
+      "note": "Thailand is mapped to mock region ap-southeast. First critical issue does not imply no previous noncritical tickets. No SLA is assumed."
+    },
+    {
+      "id": "cust-003",
+      "plan": "Pro",
+      "upgrade_attempted": null,
+      "tenure_months": 5,
+      "seats": null,
+      "region": null,
+      "entitlement": null,
+      "usage": "daily logins",
+      "past_tickets": [],
+      "sla": null,
+      "billing_events": null,
+      "synthetic_fields": [
+        "id"
+      ],
+      "unknown_fields": [
+        "upgrade_attempted",
+        "seats",
+        "region",
+        "entitlement",
+        "sla",
+        "billing_events"
+      ],
+      "note": "Plan is supplied by the brief; active entitlement and installed app version are not independently known."
+    }
+  ]
+}

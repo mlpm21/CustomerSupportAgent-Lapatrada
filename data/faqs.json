@@ -1,0 +1,128 @@
+{
+  "note": "All articles, product behavior, and keywords are synthetic mock documentation for the homework. Version-dependent behavior is conditional; no installed customer version is assumed.",
+  "articles": [
+    {
+      "id": "pending-charges",
+      "title": "Pending charges versus captured payments",
+      "content": "Pending charges are authorization holds, not confirmed captured payments. The card issuer releases authorization holds, and timing varies by bank. Repeated pending entries do not establish that multiple payments were captured; ask billing to investigate unresolved duplicates.",
+      "keywords": [
+        "pending",
+        "charges",
+        "authorization",
+        "holds",
+        "captured",
+        "payment"
+      ]
+    },
+    {
+      "id": "upgrade-payment",
+      "title": "Upgrade payment failure and Pro activation",
+      "content": "A failed payment attempt can leave a pending authorization without completing an upgrade. Pro entitlement activates only after a successful upgrade payment and entitlement provisioning. If payment records and access disagree, billing must investigate before support confirms Pro access.",
+      "keywords": [
+        "upgrade",
+        "failed",
+        "payment",
+        "pro",
+        "entitlement"
+      ]
+    },
+    {
+      "id": "billing-disputes",
+      "title": "Refunds and payment disputes",
+      "content": "Billing specialists handle refund requests, duplicate-payment concerns, and threatened bank disputes. Support cannot promise a refund, reversal, compensation, or a particular outcome. Preserve the payment evidence and describe pending versus captured records accurately.",
+      "keywords": [
+        "refund",
+        "dispute",
+        "billing",
+        "duplicate",
+        "chargeback"
+      ]
+    },
+    {
+      "id": "http-500",
+      "title": "Generic HTTP 500 troubleshooting",
+      "content": "For an isolated HTTP 500 error, retry once and note the affected browser and workflow. If practical, check whether another browser or device has the same symptom. These generic steps do not resolve or rule out a multi-user outage; repeated failures across users require infrastructure investigation.",
+      "keywords": [
+        "http",
+        "500",
+        "error",
+        "browser",
+        "outage"
+      ]
+    },
+    {
+      "id": "status-conflict",
+      "title": "Public status and internal incidents",
+      "content": "A public status page may show operational while an internal regional incident is being investigated. Check regional internal status and compare its scope with the reported symptoms. A healthy status page does not disprove customer-reported access failures, and this article provides no recovery estimate.",
+      "keywords": [
+        "status",
+        "internal",
+        "incident",
+        "region",
+        "operational",
+        "outage"
+      ]
+    },
+    {
+      "id": "dark-mode",
+      "title": "Dark mode and System Default troubleshooting",
+      "content": "Open Settings > Appearance > Theme to inspect the theme choices. The Dark option and System Default following the OS require the minimum supported desktop app version; check the installed version against the current desktop release requirements and update if it is older. If only Light and System Default appear, check for updates and restart after updating, then select System Default with the OS set to dark mode. If the app remains light on a supported version, report the version and symptoms to product support; this article does not establish the customer's installed version.",
+      "keywords": [
+        "dark",
+        "mode",
+        "system",
+        "default",
+        "theme",
+        "appearance",
+        "version",
+        "mac"
+      ]
+    },
+    {
+      "id": "scheduled-dark-mode",
+      "title": "Scheduled dark mode feature request",
+      "content": "Scheduled dark mode, including automatic switching at 6pm, is not supported. Requests for scheduling are logged as feature requests for product review, without a delivery commitment.",
+      "keywords": [
+        "schedule",
+        "scheduled",
+        "dark",
+        "mode",
+        "6pm",
+        "feature"
+      ]
+    },
+    {
+      "id": "pro-export",
+      "title": "Pro export access",
+      "content": "Pro export features require active Pro entitlement. A plan label or pending payment attempt alone does not verify that entitlement has activated. Ask billing to investigate payment and access mismatches.",
+      "keywords": [
+        "pro",
+        "export",
+        "entitlement",
+        "access"
+      ]
+    },
+    {
+      "id": "appearance-overview",
+      "title": "Appearance settings overview",
+      "content": "Settings > Appearance contains theme preferences for personalizing the application. This overview does not explain missing theme options or OS-following behavior; consult the detailed theme troubleshooting article.",
+      "keywords": [
+        "appearance",
+        "settings",
+        "theme",
+        "preferences"
+      ]
+    },
+    {
+      "id": "password-reset",
+      "title": "Password reset",
+      "content": "Use the Forgot password link on the sign-in screen to request a reset email. Check the spam folder if the email does not arrive, and contact account support if the problem persists.",
+      "keywords": [
+        "password",
+        "reset",
+        "email",
+        "sign-in"
+      ]
+    }
+  ]
+}
