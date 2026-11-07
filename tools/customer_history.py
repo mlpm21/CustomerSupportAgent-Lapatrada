@@ -1,3 +1,6 @@
+# Copyright © 2026 Lapatrada Liawpairoj. All rights reserved.
+# Provided for recruitment evaluation only. See LICENSE for terms.
+
 """Customer history lookup tool.
 
 Purpose:
@@ -23,17 +26,26 @@ class Args(ToolArgs):
 
 
 def run(customer_id: str) -> dict[str, JsonValue]:
-    """Return supplied customer attributes and clearly labeled mock assumptions."""
+    """Return customer context and labeled assumptions while preserving unknowns.
+
+    Works with:
+        Called through execute_tool_call(); uses common.get_customer().
+    """
+
     customer = get_customer(customer_id)
+
     fields = (
         "plan", "tenure_months", "seats", "region", "entitlement", "past_tickets",
         "usage", "upgrade_attempted", "synthetic_fields", "unknown_fields",
     )
+
     if any(field not in customer for field in fields):
         raise ToolError("data_unavailable")
     result = {field: customer[field] for field in fields}
     result["sla"] = customer.get("sla")
+
     for field in ("first_critical_issue", "region_label", "note"):
+
         if field in customer:
             result[field] = customer[field]
     result["source"] = "Mock customers.json; synthetic_fields lists added facts."

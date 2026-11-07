@@ -1,3 +1,6 @@
+# Copyright © 2026 Lapatrada Liawpairoj. All rights reserved.
+# Provided for recruitment evaluation only. See LICENSE for terms.
+
 """Billing event lookup tool.
 
 Purpose:
@@ -24,9 +27,15 @@ class Args(ToolArgs):
 
 
 def run(customer_id: str, days: int = 30) -> dict[str, JsonValue]:
-    """Filter known events; unavailable billing records are not an empty history."""
+    """Return known billing events within the requested snapshot-relative day window.
+
+    Works with:
+        Called through execute_tool_call(); uses common.get_customer() and raises ToolError for unavailable records.
+    """
+
     events = get_customer(customer_id).get("billing_events")
     required = {"age_minutes", "amount", "currency", "status", "card_reference"}
+
     if not isinstance(events, list) or any(
         not isinstance(event, dict)
         or not required.issubset(event)
@@ -35,6 +44,7 @@ def run(customer_id: str, days: int = 30) -> dict[str, JsonValue]:
         or any(event[field] is None for field in required)
         for event in events
     ):
+
         raise ToolError("data_unavailable")
     return {
         "events": [event for event in events if event["age_minutes"] <= days * 1440],

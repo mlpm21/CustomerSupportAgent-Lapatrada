@@ -1,3 +1,6 @@
+# Copyright © 2026 Lapatrada Liawpairoj. All rights reserved.
+# Provided for recruitment evaluation only. See LICENSE for terms.
+
 """Tool registry and execution boundary.
 
 Purpose:
@@ -23,7 +26,11 @@ TOOLS = {
 
 
 def get_tool_schemas() -> list[dict]:
-    """Generate function-tool definitions from each registered argument model."""
+    """Generate OpenAI function schemas from registered argument models.
+
+    Works with:
+        Called by agent._collect_and_propose(); reads each registered tool Args model.
+    """
     return [
         {
             "type": "function",
@@ -40,7 +47,11 @@ def get_tool_schemas() -> list[dict]:
 def execute_tool_call(
     call_id: str, name: str, raw_arguments: str, ticket_customer_id: str
 ) -> ToolResult:
-    """Return an outcome for every expected failure; let programming bugs surface."""
+    """Validate arguments and customer scope, then execute a tool or record its error.
+
+    Works with:
+        Called by agent._collect_and_propose(); calls registered run() functions and constructs ToolResult.
+    """
     tool = TOOLS.get(name)
     if tool is None:
         return ToolResult(call_id=call_id, tool_name=name, args={}, status="error", error_code="unknown_tool")
