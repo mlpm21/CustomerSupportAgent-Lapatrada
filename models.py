@@ -1,3 +1,6 @@
+# Copyright © 2026 Lapatrada Liawpairoj. All rights reserved.
+# Provided for recruitment evaluation only. See LICENSE for terms.
+
 """Shared application data models.
 
 Purpose:
@@ -97,7 +100,11 @@ class ToolResult(BaseModel):
 
     @model_validator(mode="after")
     def validate_outcome(self) -> Self:
-        """Keep successful data and error outcomes unambiguous."""
+        """Reject tool outcomes that mix successful data with error information.
+
+        Works with:
+            Called automatically by Pydantic when execute_tool_call() or other callers construct a ToolResult.
+        """
         if self.status == "success" and self.error_code is not None:
             raise ValueError("A successful tool result cannot have an error code.")
         if self.status == "error" and (not self.error_code or self.data is not None):
@@ -122,4 +129,7 @@ class AgentRun(BaseModel):
 
     proposal: TriageResult | None = None
     tool_results: list[ToolResult] = Field(default_factory=list)
-    failure_reason: Literal["api_error", "refusal", "invalid_output", "loop_exhausted"] | None = None
+    failure_reason: Literal["api_error", "refusal", "invalid_output"] | None = None
+    tool_budget_exhausted: bool = Field(
+        default=False, description="The model was still requesting tools when the round limit was reached.",
+    )

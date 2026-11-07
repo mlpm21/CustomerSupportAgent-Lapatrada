@@ -1,3 +1,6 @@
+# Copyright © 2026 Lapatrada Liawpairoj. All rights reserved.
+# Provided for recruitment evaluation only. See LICENSE for terms.
+
 """Knowledge base search tool.
 
 Purpose:
@@ -32,17 +35,28 @@ class Args(ToolArgs):
 
 
 def tokens(text: str) -> set[str]:
-    """Match whole case-insensitive words rather than arbitrary substrings."""
+    """Extract case-insensitive whole-word tokens for keyword matching.
+
+    Works with:
+        Called by run() for the query, article titles, content, and keywords.
+    """
     return set(re.findall(r"\w+", text.casefold()))
 
 
 def run(query: str, top_k: int = 3) -> list[dict[str, JsonValue]]:
-    """Return matching articles in stable score order, or an empty successful list."""
+    """Rank matching FAQs after removing query stopwords; return an empty list for no matches.
+
+    Works with:
+        Called through execute_tool_call(); uses common.load_data() and tokens().
+    """
+
     articles = load_data("faqs.json").get("articles")
+
     if not isinstance(articles, list):
         raise ToolError("data_unavailable")
     terms = tokens(query) - QUERY_STOPWORDS
     hits = []
+
     for article in articles:
         if not isinstance(article, dict) or any(
             not isinstance(article.get(field), str) for field in ("id", "title", "content")
@@ -54,10 +68,12 @@ def run(query: str, top_k: int = 3) -> list[dict[str, JsonValue]]:
         content = tokens(article["content"])
         keywords = tokens(" ".join(article["keywords"]))
         score = sum(3 * (term in title) + 2 * (term in keywords) + (term in content) for term in terms)
+
         if score:
             hits.append({
                 "id": article["id"], "title": article["title"],
                 "content": article["content"], "score": score,
                 "source": "Synthetic mock FAQ",
             })
+
     return sorted(hits, key=lambda hit: (-hit["score"], hit["id"]))[:top_k]
